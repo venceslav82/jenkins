@@ -1,0 +1,47 @@
+351541fd-46b8-4ad6-8c5b-febaaf0043e9
+2:31
+
+101
+
+sudo passwd jenkins
+parola : jenkins
+
+
+sudo su - jenkins
+ssh-keygen -t rsa -m PEM
+ssh-copy-id jenkins@vm101.do1.lab
+ssh-copy-id jenkins@vm102.do1.lab
+ssh-copy-id jenkins@vm103.do1.lab
+
+
+sudo useradd jenkins
+sudo passwd jenkins
+
+102
+трябва ми docker-compose.yml за да дигна гитеа. 
+копирам го
+cp /vagrant/docker-compose.yml .      
+и го пускам
+docker-compose up -d        и вече имам гитеа на http://192.168.99.102:3000
+настройвам я и давам нова миграция (клонирам си проект от github)
+
+Webhooh
+Go to Gitea
+Enter the Settings of the repository
+Switch to Webhooks
+Click Add Webhook and select Gitea
+Enter http://192.168.99.101:8080/gitea-webhook/post in the Target URL
+Confirm with the Add Webhook button
+
+
+jenkins 8080
+gitea 30000
+
+033174a5-0a9b-4642-bf5f-08c87bbaf5c7
+
+curl -X POST http://192.168.99.103:9090/-/reload       - restart Prometheus
+grafana - port:3000
+prometheus - port:9090
+jenkins - port:8080
+gitea - port:3000
+kibana - port:5601

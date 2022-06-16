@@ -1,0 +1,17 @@
+pipeline 
+{
+    agent 
+    {
+      label 'docker'
+    }
+    stages 
+    {
+      stage ('Clone')
+      {
+        steps 
+          {
+            sh 'docker container run -d --name con-venci -p 8080:80 venceslav82/bgapp-web'
+          }
+      }
+    }
+}

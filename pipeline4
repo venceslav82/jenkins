@@ -1,0 +1,31 @@
+pipeline 
+{
+    agent
+    {
+        label 'docker'
+    }
+    stages 
+    {
+        stage('Clone') 
+        { 
+            steps 
+            {
+                git branch: 'main', url: 'https://github.com/venceslav82/hw3'
+            }
+        }
+        stage('Build') 
+        { 
+            steps 
+            {
+                sh 'docker network rm test-net || true'
+                sh 'docker network create test-net'
+
+                sh 'docker image rm img-test || true'
+                sh 'docker image build -t img-test --file Dockerfile.web .'
+
+                sh 'docker container rm -f con-test || true'
+                sh 'docker container run -d --name con-test -p 8081:80 img-test' 
+            }
+        }
+    }
+}

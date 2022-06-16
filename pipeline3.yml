@@ -1,0 +1,30 @@
+pipeline
+{
+  agent
+  {
+    label 'docker'
+  } 
+  stages
+  {
+    stage ('Container build')
+    {
+      steps
+      {
+        script
+        {
+        
+        if ([ -d "/home/jenkins/workspace/hw3" ] == true) {
+            echo 'Hello from main branch'
+        } else {
+
+        sh 'cd /home/jenkins'
+        sh 'git clone https://github.com/venceslav82/hw3'
+        sh 'cd /home/jenkins/workspace/hw3'            
+
+        }
+       }
+
+      }
+    }
+  }
+}
