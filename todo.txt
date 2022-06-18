@@ -1,7 +1,7 @@
-351541fd-46b8-4ad6-8c5b-febaaf0043e9
-2:31
 
-101
+
+
+
 
 sudo passwd jenkins
 parola : jenkins
